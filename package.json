@@ -4,16 +4,13 @@
   "author": "Pavlo Hlazkov",
   "scripts": {
     "test": "npx playwright test",
-    "test:api": "ts-mocha tests/api",
     "test-ui": "npx playwright test --ui",
     "lint": "npx eslint . --color --fix --quiet"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.2.0",
     "@playwright/test": "^1.39.0",
-    "@types/chai": "^4.3.9",
     "@types/node": "^20.8.10",
-    "@types/mocha": "^10.0.3",
     "@typescript-eslint/eslint-plugin": "^6.9.1",
     "@typescript-eslint/parser": "^6.9.1",
     "axios": "^1.6.0",
@@ -23,11 +20,8 @@
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-playwright": "^0.18.0",
     "eslint-plugin-prettier": "^5.0.1",
-    "mocha": "^10.2.0",
-    "chai": "^4.3.10",
     "prettier": "^3.0.3",
     "ts-node": "^10.9.1",
-    "ts-mocha": "^10.0.0",
     "typescript": "^5.2.2"
   }
 }

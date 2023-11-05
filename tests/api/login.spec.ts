@@ -1,13 +1,13 @@
-import { expect } from 'chai';
+import { expect, test } from '@playwright/test';
 import { authApi } from '../../src/api/authApi';
 
-describe('Auth API tests', () => {
+test.describe('Auth flow', () => {
   // this flow is not gonna work, its better to try via client secret
-  it.skip('Positive user auth flow', async () => {
+  test.fixme('Perform login', async () => {
     const response = await authApi.v1.postUser(
       {
         email: 'cute.box@hotmail.com',
-        password: 'Gfhjkm678^@*',
+        password: '',
         invitationToken: '',
       },
       {
@@ -18,7 +18,6 @@ describe('Auth API tests', () => {
         Origin: 'https://cloud.scylladb.com',
       },
     );
-    // eslint-disable-next-line playwright/valid-expect
-    expect(response.data.accessToken).to.not.be.undefined;
+    expect(response.data.accessToken).toBeTruthy();
   });
 });
