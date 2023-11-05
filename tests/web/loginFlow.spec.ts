@@ -1,4 +1,4 @@
-import { test } from '../src/fixture';
+import { test } from '../../src/fixture';
 import { expect } from '@playwright/test';
 
 test.describe('Auth flow', () => {
