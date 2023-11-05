@@ -32,7 +32,6 @@ export class NewClusterPage extends BasePage {
 }
 
 class NewClusterStepper extends BasePage {
-  // [class$='step']
   private locator: Locator;
 
   constructor(page: Page) {
