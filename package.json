@@ -2,6 +2,10 @@
   "name": "scylladb-taf",
   "version": "0.0.1",
   "author": "Pavlo Hlazkov",
+  "engines" : {
+    "npm" : ">=8.0.0",
+    "node" : ">=16.0.0"
+  },
   "scripts": {
     "test": "npx playwright test",
     "test-ui": "npx playwright test --ui",
