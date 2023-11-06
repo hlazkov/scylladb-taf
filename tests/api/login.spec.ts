@@ -1,13 +1,15 @@
 import { expect, test } from '@playwright/test';
 import { authApi } from '../../src/api/authApi';
+import { users } from '../../src/utils/users.util';
 
 test.describe('Auth flow', () => {
   // this flow is not gonna work, its better to try via client secret
   test.fixme('Perform login', async () => {
+    const user = users['pavlo'];
     const response = await authApi.v1.postUser(
       {
-        email: 'cute.box@hotmail.com',
-        password: '',
+        email: user.email,
+        password: user.password,
         invitationToken: '',
       },
       {
