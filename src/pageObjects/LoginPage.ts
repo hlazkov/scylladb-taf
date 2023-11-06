@@ -8,4 +8,6 @@ export class LoginPage extends BasePage {
   emailInput = this.page.locator('[data-test-id=input-email]');
   passwordInput = this.page.locator('[data-test-id=input-password]');
   submitButton = this.page.locator('[data-test-id=submit-btn]');
+  loginErrorLabel = this.page.locator('[data-test-id="login-error"]');
+  emailBoxErrorLabel = this.page.locator('[data-test-id="email-box_error"]');
 }
