@@ -1,20 +1,19 @@
-import { test } from '../../../src/fixture';
+import { authorisedContext as test } from '../../../src/fixture';
 import { expect } from '@playwright/test';
 import { users } from '../../../src/utils/users.util';
-import { loginAsUser } from '../../../src/utils/loginHelper.util';
 
 test.describe('New Dedicated Cluster User flow: Step "Deployment"', () => {
-  const user = users['pavlo'];
+  const withUser = users['pavlo'];
+  test.use({ withUser });
 
-  test.beforeEach(async ({ loginPage, deploymentStepPage }) => {
-    await loginAsUser(loginPage, user);
+  test.beforeEach(async ({ deploymentStepPage }) => {
     await deploymentStepPage.navigate();
     await deploymentStepPage.waitForNavigation();
   });
 
   /*
-  - Name input - Cluster name should start and end with an alphanumeric character and can contain @ _ & # -.
-  It should contain a maximum of 30 characters. Please verify the appropriate message is displayed.
+    - Name input - Cluster name should start and end with an alphanumeric character and can contain @ _ & # -.
+    It should contain a maximum of 30 characters. Please verify the appropriate message is displayed.
    */
   test.describe(`Name input validations`, () => {
     const clusterNameWarningMessage = {
@@ -50,5 +49,36 @@ test.describe('New Dedicated Cluster User flow: Step "Deployment"', () => {
         expect.soft(deploymentStepPage.page.url()).toEqual(deploymentStepPage.url);
       }),
     );
+  });
+
+  /*
+    - Missing name input - When the user is navigating to the next page using the button NEXT: NETWORK SETTINGS,
+    He should be prompted that the cluster name is missing. Once filled, he will be redirected to the next step when
+    the button is clicked.
+
+   Note: Positive case is covered in describe below
+   */
+  test.describe(`Missing name input validations`, () => {
+    const clusterNameWarningMessage = 'This field is required';
+
+    test(`Missing name check`, async ({ deploymentStepPage }) => {
+      await deploymentStepPage.launchClusterButton.click();
+      await expect.soft(deploymentStepPage.clusterNameWarningLabel).toBeVisible();
+      await expect.soft(deploymentStepPage.clusterNameWarningLabel).toHaveText(clusterNameWarningMessage);
+      expect.soft(deploymentStepPage.page.url()).toEqual(deploymentStepPage.url);
+    });
+  });
+
+  /*
+    - Region change - When a different region is selected than the default one, the pricing should change.
+    You can select any region. When changing a region, the pricing displayed above the NEXT button should change
+   */
+  test.describe(`Region change validations`, () => {
+    test(`Missing name check`, async ({ deploymentStepPage }) => {
+      await deploymentStepPage.launchClusterButton.click();
+      await expect.soft(deploymentStepPage.clusterNameWarningLabel).toBeVisible();
+      // await expect.soft(deploymentStepPage.clusterNameWarningLabel).toHaveText(clusterNameWarningMessage);
+      expect.soft(deploymentStepPage.page.url()).toEqual(deploymentStepPage.url);
+    });
   });
 });

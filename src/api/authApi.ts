@@ -6,9 +6,15 @@ class AuthApi extends ApiClient {
   }
 
   v1 = {
-    postUser: (body: object, headers?: object): Response<{ accessToken: string }> =>
+    postUser: (body: PostUserRequestBody, headers?: object): Response<{ accessToken?: string; errors?: string[] }> =>
       this.post(`/v1/user`, body, headers),
   };
 }
 
 export const authApi = new AuthApi();
+
+export interface PostUserRequestBody {
+  email: string;
+  password: string;
+  invitationToken?: string;
+}

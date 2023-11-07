@@ -1,14 +1,10 @@
-import { test } from '../../src/fixture';
+import { authorisedContext as test } from '../../src/fixture';
 import { expect } from '@playwright/test';
 import { users } from '../../src/utils/users.util';
-import { loginAsUser } from '../../src/utils/loginHelper.util';
 
 test.describe('Navigation scenarios', () => {
-  const user = users['pavlo'];
-
-  test.beforeEach(async ({ loginPage }) => {
-    await loginAsUser(loginPage, user);
-  });
+  const withUser = users['pavlo'];
+  test.use({ withUser });
 
   test('Navigate to create new dedicated cluster page', async ({ homePage, deploymentStepPage }) => {
     await homePage.navigation.newClusterButton.click();

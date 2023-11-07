@@ -10,7 +10,12 @@ export class ApiClient {
       baseURL,
       timeout: 15000,
       validateStatus: () => true,
-      headers,
+      headers: {
+        // IDK why it (Frontegg app) does not like axios user-agent
+        'User-Agent':
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+        ...headers,
+      },
     });
   }
 
