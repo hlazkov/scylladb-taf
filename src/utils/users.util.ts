@@ -1,4 +1,4 @@
-import fs from 'fs';
+import * as fs from 'fs';
 
 export interface User {
   name: string;
