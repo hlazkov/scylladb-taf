@@ -17,6 +17,7 @@ export class NewClusterBasePage extends BasePage {
 
   pageTitleLabel = this.page.locator('#pageTitle');
 
+  totalCostLabel = this.page.locator('#totalCostPerHour');
   launchClusterButton = this.page.locator('#launchClusterBtn');
 }
 

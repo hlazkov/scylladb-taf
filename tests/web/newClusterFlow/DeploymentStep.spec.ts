@@ -1,6 +1,8 @@
 import { authorisedContext as test } from '../../../src/fixture';
 import { expect } from '@playwright/test';
 import { users } from '../../../src/utils/users.util';
+import { deploymentApi } from '../../../src/api/DeploymentApi';
+import { faker } from '@faker-js/faker';
 
 test.describe('New Dedicated Cluster User flow: Step "Deployment"', () => {
   const withUser = users['pavlo'];
@@ -9,6 +11,7 @@ test.describe('New Dedicated Cluster User flow: Step "Deployment"', () => {
   test.beforeEach(async ({ deploymentStepPage }) => {
     await deploymentStepPage.navigate();
     await deploymentStepPage.waitForNavigation();
+    await expect(deploymentStepPage.pageTitleLabel).toBeVisible(); // waiting till page is loaded
   });
 
   /*
@@ -75,10 +78,24 @@ test.describe('New Dedicated Cluster User flow: Step "Deployment"', () => {
    */
   test.describe(`Region change validations`, () => {
     test(`Missing name check`, async ({ deploymentStepPage }) => {
-      await deploymentStepPage.launchClusterButton.click();
-      await expect.soft(deploymentStepPage.clusterNameWarningLabel).toBeVisible();
-      // await expect.soft(deploymentStepPage.clusterNameWarningLabel).toHaveText(clusterNameWarningMessage);
-      expect.soft(deploymentStepPage.page.url()).toEqual(deploymentStepPage.url);
+      const getPrices = async () => {
+        const prices: string[] = [];
+        const pricesLocatos = await deploymentStepPage.table.prices.all();
+        for (const locator of pricesLocatos) prices.push(await locator.textContent());
+        return prices;
+      };
+
+      const pricePerHourForRegion1 = await deploymentStepPage.totalCostLabel.textContent();
+      const pricesForRegion1 = await getPrices();
+      const regionsAvailable = (await deploymentApi.getRegions()).data.data.regions;
+      const regionToSet = faker.helpers.arrayElement(regionsAvailable.filter(region => region.id !== 1)); // excluding default one
+      await deploymentStepPage.regionSelector.click();
+      await deploymentStepPage.regionDropdownItem(regionToSet.id).click();
+      const pricesForNewRegion = await getPrices();
+      const pricePerHourForNewRegion = await deploymentStepPage.totalCostLabel.textContent();
+
+      expect(pricesForRegion1.sort()).not.toEqual(pricesForNewRegion.sort());
+      expect(pricePerHourForRegion1).not.toEqual(pricePerHourForNewRegion);
     });
   });
 });

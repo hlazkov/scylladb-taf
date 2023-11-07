@@ -2,7 +2,7 @@ import { ApiClient, Response } from './ApiClient';
 
 class DeploymentApi extends ApiClient {
   constructor() {
-    super(`https://${process.env.BASE_URL}api/deployment`);
+    super(`${process.env.BASE_URL}api/deployment`);
   }
 
   getVersions = (): Response<{ errors?: string[]; data: { scyllaVersions: ScyllaVersion[] } }> =>

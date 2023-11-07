@@ -19,7 +19,13 @@ export class DeploymentStepPage extends NewClusterBasePage {
     // todo recheck on disabled
     personalAWS: this.page.getByTestId('accountCredentialOptionCustomDisabled'),
   };
+  regionSelector = this.page.getByTestId('region');
+  regionDropdown = this.page.locator('div[tabindex="-1"]'); // bad locator :(
+  regionDropdownItem = (id: number) => this.regionDropdown.locator(`#cloudProviderRegion${id}`);
+
   // todo add this once we need it :)
   versionDropdown = null;
-  regionDropdown = null;
+  table = {
+    prices: this.page.locator('[data-component="CostsCell"] [class$= costPerHour]'),
+  };
 }

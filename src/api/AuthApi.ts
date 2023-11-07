@@ -2,7 +2,7 @@ import { ApiClient, Response } from './ApiClient';
 
 class AuthApi extends ApiClient {
   constructor() {
-    super(`https://auth.${process.env.BASE_URL}frontegg/identity/resources/auth`);
+    super(`https://auth.cloud.scylladb.com/frontegg/identity/resources/auth`);
   }
 
   v1 = {
