@@ -22,6 +22,8 @@ You will need to run this code:
 - run `cp ./.env.example ./.env`
   - This config is also personal, so you could modify it as you like
 - run code with `npm run test`
+- [optional] to use playwright test runner, run `npm run test-ui`
+- [optional] to check the code quality run `npm run lint`
 
 ### Setting proper env variables:
 
