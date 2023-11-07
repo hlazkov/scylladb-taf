@@ -7,7 +7,7 @@ import { HomePage } from './pageObjects/HomePage';
 import { NetworkStepPage } from './pageObjects/newCluster/NetworkStepPage';
 import { PaymentStepPage } from './pageObjects/newCluster/PaymentStepPage';
 import { users } from './utils/users.util';
-import { authApi } from './api/authApi';
+import { authApi } from './api/AuthApi';
 
 type Pages = {
   loginPage: LoginPage;

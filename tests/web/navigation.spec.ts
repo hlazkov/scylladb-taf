@@ -6,6 +6,8 @@ test.describe('Navigation scenarios', () => {
   const withUser = users['pavlo'];
   test.use({ withUser });
 
+  test.beforeEach(async ({ homePage }) => homePage.navigate());
+
   test('Navigate to create new dedicated cluster page', async ({ homePage, deploymentStepPage }) => {
     await homePage.navigation.newClusterButton.click();
     await homePage.navigation.newClusterDropdownMenu.dedicatedVM.click();

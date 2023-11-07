@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { authApi, PostUserRequestBody } from '../../src/api/authApi';
+import { authApi, PostUserRequestBody } from '../../src/api/AuthApi';
 import { users } from '../../src/utils/users.util';
 
 test.describe('Auth flow', () => {
