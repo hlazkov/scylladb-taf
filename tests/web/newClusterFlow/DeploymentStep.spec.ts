@@ -94,8 +94,8 @@ test.describe('New Dedicated Cluster User flow: Step "Deployment"', () => {
       const pricesForNewRegion = await getPrices();
       const pricePerHourForNewRegion = await deploymentStepPage.totalCostLabel.textContent();
 
-      expect(pricesForRegion1.sort()).not.toEqual(pricesForNewRegion.sort());
-      expect(pricePerHourForRegion1).not.toEqual(pricePerHourForNewRegion);
+      expect.soft(pricesForRegion1.sort()).not.toEqual(pricesForNewRegion.sort());
+      expect.soft(pricePerHourForRegion1).not.toEqual(pricePerHourForNewRegion);
     });
   });
 });
